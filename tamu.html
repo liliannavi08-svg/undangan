@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Undangan</title>
+</head>
+<body>
+  <span id="nama-tamu">Tamu Undangan</span>
+
+  <script>
+    // Ambil parameter dari URL
+    const params = new URLSearchParams(window.location.search);
+    const nama = params.get("to");
+
+    // Tampilkan nama jika ada
+    if (nama) {
+      document.getElementById("nama-tamu").textContent = decodeURIComponent(nama);
+    }
+  </script>
+</body>
+</html>
