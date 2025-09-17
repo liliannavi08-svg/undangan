@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Ana & Andi</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      height: 100%;
+      font-family: 'Lora', Lora;
+      overflow: hidden;
+    }
+
+    .page {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      color: #591E1F;
+      padding: 20px;
+    }
+
+    /* Cover */
+    #cover {
+      background: url('Undangan tanpa foto_20250915_091132_0000.png') no-repeat center center;
+      background-size: cover;
+    }
+    #cover h1, #cover h2, #cover p, #cover button {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease forwards;
+    }
+    #cover h1 { font-size: 2rem; animation-delay: 0.5s; }
+    #cover h2 { font-size: 1.5rem; animation-delay: 1.5s; }
+    #cover p { font-size: 1.2rem; margin: 15px 0; animation-delay: 2.5s; }
+    #cover button {
+      padding: 12px 24px;
+      font-size: 15px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #591E1F, #591E1F);
+      color: #fff ;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      animation-delay: 3.5s;
+    }
+    #cover button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Isi Undangan */
+    #content {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+    iframe {
+      flex: 1;
+      border: none;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
+      animation-delay: 0.5s;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Cover -->
+  <div id="cover" class="page">
+    <h1>The Wedding of</h1>
+    <br></br>
+    <h2>Ana & Andi</h2>
+    <br></br>
+    <br></br>
+    <p>Kepada Yth.<br><span id="guest-name">Tamu Undangan</span></p>
+    <button onclick="openInvitation()">Buka Undangan</button>
+  </div>
+
+  <!-- Isi Undangan -->
+  <div id="content" class="page">
+    <!-- Musik -->
+    <audio id="bg-music" loop>
+      <source src="Pernikahan Kita - Tiara Andini feat Arsy Widianto _ Lirik Lagu (128).mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Canva embed -->
+    <iframe
+      src="https://rumaimpian123.my.canva.site/undangan-foto"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <script>
+    // Ambil nama tamu dari parameter ?to=
+    const params = new URLSearchParams(window.location.search);
+    const guest = params.get("to");
+    if (guest) {
+      document.getElementById("guest-name").innerText = guest;
+    }
+
+    // Fungsi buka undangan
+    function openInvitation() {
+      document.getElementById("cover").style.display = "none";
+      document.getElementById("content").style.display = "flex";
+      document.getElementById("bg-music").play();
+    }
+  </script>
+</body>
+</html>
