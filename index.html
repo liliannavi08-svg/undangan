@@ -1,207 +1,133 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Undangan Pernikahan Sarah & Ryan</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Ana & Andi</title>
   <style>
-    /* Reset dan base */
-    * {
-      text-align: center;
-      margin: 20;
-      padding: 20;
-      box-sizing: border-box;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      height: 100%;
+      font-family: 'Lora', Lora;
+      overflow: hidden;
     }
-    body {      
 
-      background: url('Undangan tanpa foto_20250915_091132_0000.png') no-repeat center center;
-
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      
-      color: #333;
-      overflow-x: hidden;
-      min-height: 100vh;
+    .page {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
       justify-content: center;
-    }
-    h1, h2, h3 {
-      font-family: 'Georgia', serif;
-      margin-bottom: 50px;
+      background-size: cover;
+      background-position: center;
+      text-align: center;
       color: #591E1F;
+      padding: 20px;
     }
-    h1 {
-      font-size: 3rem;
-      color: #591E1F;
-    }
-    h2 {
-      font-size: 2rem;
-      color: #591E1F;
-    }
-    p {
-      margin-bottom: 15px;
-      font-size: 1.1rem;
-      color: #591E1F;
-    }
-    .divider {
-      width: 80px;
-      height: 3px;
-      background: linear-gradient(to right, transparent, #db2777, transparent);
-      margin: 20px auto;
-      border-radius: 2px;
-    }
-    .btn-undangan {
-  background: #591E1F;
-  color: white;
-  border: none;
-  padding: 15px 40px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
-}
-.btn-undangan:hover {
-  background: linear-gradient(90deg, #db2777, #7c3aed);
-  transform: scale(1.05);
-}
-.btn-undangan:active {
-  transform: scale(0.95);
-}
 
-    /* Animasi terbit dari bawah ke atas */
-    .fade-up {
+    /* Cover */
+    #cover {
+      background: url('Undangan tanpa foto_20250915_091132_0000.png') no-repeat center center;
+      background-size: cover;
+    }
+    #cover h1, #cover h2, #cover p, #cover button {
       opacity: 0;
-      transform: translateY(40px);
-      animation-fill-mode: forwards;
-      animation-name: fadeUp;
-      animation-duration: 0.8s;
-      animation-timing-function: ease-out;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease forwards;
     }
-    .fade-up.delay-1 {
-      animation-delay: 0.3s;
+    #cover h1 { font-size: 2rem; animation-delay: 0.5s; }
+    #cover h2 { font-size: 1.5rem; animation-delay: 1.5s; }
+    #cover p { font-size: 1.2rem; margin: 15px 0; animation-delay: 2.5s; }
+    #cover button {
+      padding: 12px 24px;
+      font-size: 15px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #591E1F, #591E1F);
+      color: #fff ;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      animation-delay: 3.5s;
     }
-    .fade-up.delay-2 {
-      animation-delay: 0.6s;
+    #cover button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+
     }
-    .fade-up.delay-3 {
-      animation-delay: 0.9s;
-    }
-    .fade-up.delay-4 {
-      animation-delay: 1.2s;
-    }
-    .fade-up.delay-5 {
-      animation-delay: 1.5s;
-    }
+
     @keyframes fadeUp {
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-   
+
+    /* Isi Undangan */
+    #content {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+    }
+    iframe {
+      flex: 1;
+      border: none;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
+      animation-delay: 0.5s;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h2 class="fade-up">The Wedding of</h2>
-    <h1 class="fade-up delay-6">Sarah & Ryan</h1>
-    <p class="fade-up delay-1">Kepada Yth:</p>
-    <div class="divider fade-up delay-2"></div>
-    <h3 id="namaTamu" class="fade-up delay-3">Bapak/Ibu/Saudara/i Terkasih</h3>
-    <a href="https://rumaimpian123.my.canva.site/tanpa-foto" class="btn-undangan">Buka Undangan</a>
-    
-    
-  </header>
+  <!-- Cover -->
+  <div id="cover" class="page">
+    <h1>The Wedding of</h1>
+    <br></br>
+    <h2>Ana & Andi</h2>
+    <br></br>
+    <br></br>
+    <p>Kepada Yth.<br><span id="guest-name">Tamu Undangan</span></p>
+    <button onclick="openInvitation()">Buka Undangan</button>
+  </div>
 
+  <!-- Isi Undangan -->
+  <div id="content" class="page">
+    <!-- Musik -->
+    <audio id="bg-music" loop>
+      <source src="Pernikahan Kita - Tiara Andini feat Arsy Widianto _ Lirik Lagu (128).mp3" type="audio/mpeg">
+    </audio>
 
-  
+    <!-- Canva embed -->
+    <iframe
+      src="https://rumaimpian123.my.canva.site/undangan-foto"
+      allowfullscreen>
+    </iframe>
+  </div>
+
   <script>
-    // Fungsi ambil parameter URL
-    function getQueryParam(param) {
-      const params = new URLSearchParams(window.location.search);
-      return params.get(param);
+    // Ambil nama tamu dari parameter ?to=
+    const params = new URLSearchParams(window.location.search);
+    const guest = params.get("to");
+    if (guest) {
+      document.getElementById("guest-name").innerText = guest;
     }
 
-    // Set nama tamu otomatis dari parameter ?to=nama
-    const namaTamuParam = getQueryParam('to');
-    if (namaTamuParam) {
-      const namaTamuEl = document.getElementById('namaTamu');
-      if (namaTamuEl) {
-        namaTamuEl.textContent = decodeURIComponent(namaTamuParam.replace(/\+/g, ' '));
-      }
+    // Fungsi buka undangan
+    function openInvitation() {
+      document.getElementById("cover").style.display = "none";
+      document.getElementById("content").style.display = "flex";
+      document.getElementById("bg-music").play();
     }
-
-    // Countdown
-    const eventDate = new Date('2024-12-31T18:00:00').getTime();
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
-
-      if (distance < 0) {
-        document.getElementById('days').textContent = '0';
-        document.getElementById('hours').textContent = '0';
-        document.getElementById('minutes').textContent = '0';
-        document.getElementById('seconds').textContent = '0';
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById('days').textContent = days;
-      document.getElementById('hours').textContent = hours;
-      document.getElementById('minutes').textContent = minutes;
-      document.getElementById('seconds').textContent = seconds;
-    }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-    // Simpan ucapan tamu di localStorage agar tetap muncul
-    const messagesList = document.getElementById('messagesList');
-    let messages = JSON.parse(localStorage.getItem('ucapanTamu') || '[]');
-
-    function renderMessages() {
-      messagesList.innerHTML = '';
-      messages.forEach(msg => {
-        const div = document.createElement('div');
-        div.className = 'message fade-up';
-        div.style.animationDelay = '0.3s';
-        div.innerHTML = `<strong>${msg.name}</strong><p>${msg.message}</p>`;
-        messagesList.appendChild(div);
-      });
-    }
-    renderMessages();
-
-    // Form submit handler
-    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const name = this.name.value.trim();
-      const message = this.message.value.trim();
-
-      if (!name || !message) {
-        alert('Mohon isi nama dan ucapan dengan lengkap.');
-        return;
-      }
-
-      // Tambah ke array dan simpan ke localStorage
-      messages.unshift({ name, message });
-      if (messages.length > 20) messages.pop(); // batasi 20 pesan terakhir
-      localStorage.setItem('ucapanTamu', JSON.stringify(messages));
-
-      renderMessages();
-
-      alert(`Terima kasih, ${name}, atas konfirmasi dan ucapan Anda!`);
-
-      this.reset();
-    });
   </script>
 </body>
 </html>
