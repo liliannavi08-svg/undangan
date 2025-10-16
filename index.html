@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Untuk responsif di HP -->
+    <title>Undangan Pernikahan</title>
+    <style>
+        body {
+            margin: 0;
+            background-image: url('Cover.png'); /* Ganti dengan URL gambar latar dari Canva atau upload baru */
+            background-size: cover;
+            color: #6B6848; /* Warna teks, sesuaikan dengan latar */
+            text-align: center; /* Pastikan semua elemen di dalam body terpusat */
+            font-family: 'Arial', sans-serif;
+            display: flex; /* Tambahkan flex untuk bantuan pusat vertikal jika diperlukan */
+            flex-direction: column;
+            justify-content: center; /* Pusat vertikal untuk elemen utama */
+            align-items: center; /* Pusat horizontal */
+            height: 100vh; /* Membuat body full height */
+        }
+        .title {
+            font-size: 30px; /* Ukuran untuk "The Wedding of John & Jane" */
+            margin-top: 0; /* Atur ulang margin untuk pusat yang lebih baik */
+            font-family: 'Great Vibes', cursive; /* Font elegan */
+            text-align: center; /* Pastikan terpusat */
+        }
+        .guest-title {
+            font-size: 15px; /* Ukuran untuk "Kepada Yth:" */
+            margin-top: 10px; /* Jarak dari elemen sebelumnya */
+            text-align: center; /* Pastikan terpusat */
+        }
+        .guest-sub-title {
+            font-size: 15px; /* Ukuran untuk nama tamu */
+            margin-top: 5px; /* Jarak di bawah "Kepada Yth:" */
+            text-align: center; /* Pastikan terpusat */
+        }
+        .button {
+            background-color: #7C7A59;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: inline-block;
+            text-align: center; /* Pastikan teks tombol terpusat */
+        }
+    </style>
+    <script>
+        // JavaScript untuk membaca parameter URL dan update teks
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const namaTamu = urlParams.get('to');  // Ambil nilai dari ?to=
+            
+            if (namaTamu) {
+                // Capitalize nama tamu untuk tampilan lebih bagus (opsional)
+                const formattedNama = namaTamu.toUpperCase();  // Atau gunakan fungsi toProperCase jika dibutuhkan
+                document.getElementById('guestName').textContent = formattedNama;  // Update teks nama tamu
+            } else {
+                document.getElementById('guestName').textContent = 'Tamu Tercinta';  // Default jika tidak ada parameter
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1 class="title">The Wedding of</h1>
+    <h1 class="title">Levoka & Devron</h1>
+
+    <!-- Ganti dengan nama mempelai asli -->
+    <h2 class="guest-title">Kepada Yth:</h2>  <!-- Teks "Kepada Yth:" sebagai baris terpisah -->
+    <h3 class="guest-sub-title" id="guestName">Nama Tamu</h3>  <!-- Nama tamu di baris di bawah, diupdate otomatis -->
+    <a href="https://yourweddingsite.com" class="button">Buka Undangan</a>
+    
+    <!-- Audio yang otomatis berputar -->
+    <audio autoplay loop>
+        <source src="Pernikahan.mp3" type="audio/mpeg"> <!-- Ganti dengan URL lagu dari Canva -->
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+</body>
+</html>
