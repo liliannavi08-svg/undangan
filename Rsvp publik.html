@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RSVP — Undangan</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent:#6b7aa3;
+      --accent-contrast:#fff;
+      --panel-bg: rgba(255,255,255,0.4); /* 🌸 Putih transparan samar */
+      --muted:#6b7280;
+      --card-radius:28px;
+      --shadow: 0 10px 30px rgba(2,6,23,0.18);
+      --bg-img: url('BG.png'); /* Ganti gambar latar kamu */
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:'Poppins',system-ui,-apple-system,Helvetica,Arial,sans-serif;
+      color:#111;
+      background:#fafafa;
+    }
+
+    /* halaman full background */
+    .page{
+      min-height:100vh;
+      background-image: var(--bg-img);
+      background-size: cover;
+      background-position: center;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:28px 16px;
+    }
+
+    /* Panel besar transparan */
+    .panel{
+      width:100%;
+      max-width:720px;
+      background: var(--panel-bg); /* 🌸 transparan */
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow);
+      padding:28px;
+    }
+
+    .top{
+      text-align:center;
+      margin-bottom:18px;
+    }
+
+    .title-script{
+      font-family:'Playfair Display',serif;
+      font-size:34px;
+      margin:8px 0 14px 0;
+      color:#1f2937;
+    }
+
+    /* Countdown */
+    .count-row{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+
+    /* Box hari, jam, menit, detik */
+    .count-box{
+      width:60px;     /* box countdown */ 
+      height:60px;    /* box countdown */
+      border-radius:14px;
+      background:var(--accent);
+      color:var(--accent-contrast);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      background: #7c7a59;
+      box-shadow:0 6px 18px rgba(11,20,36,0.15);
+    }
+    /* ukuran font hari, jam, menit, detik */
+    .count-box .num{font-size:20px;font-weight:700}        /* ukuran font */
+    .count-box .lbl{font-size:11px;opacity:0.92;margin-top:6px} /* ukuran font  */
+    
+    /* Tombol Save The Date */
+    .save-btn{
+      display:inline-block;
+      margin:12px auto 0;
+      padding:8px 18px; /* ukuran box save the date */
+      font-size: 14px;
+      border-radius:22px;
+      background:var(--accent);
+      color:var(--accent-contrast);
+      font-weight:600;
+      border:0;
+      cursor:pointer;
+      text-decoration:none;
+      background: #7c7a59;
+      box-shadow:0 6px 18px rgba(11,20,36,0.08);
+    }
+
+    .section-title{
+      font-family:'Playfair Display',serif;
+      font-size:28px;
+      text-align:center;
+      margin:22px 0 8px 0;
+      color:#1f2937;
+    }
+
+    .subtitle{
+      text-align:center;
+      color:var(--muted);
+      margin-bottom:18px;
+    }
+
+    /* Form card (tetap putih solid) */
+    .form-card{
+      background:#fff;
+      border-radius:16px;
+      padding:16px;
+      box-shadow:0 4px 18px rgba(4,10,20,0.06);
+      margin-bottom:18px;
+    }
+
+    label{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+
+    input, textarea, select{
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:1px solid rgba(15,23,42,0.06);
+      font-size:15px;
+      background:#fff;
+      box-sizing:border-box;
+    }
+
+    textarea{min-height:96px;resize:vertical}
+
+    .btn-row{display:flex;gap:12px;margin-top:12px}
+    .btn-submit{
+      flex:1;
+      background:var(--accent);
+      background: #7c7a59;     /* Tombol Kirim */
+      color:var(--accent-contrast);
+      padding:12px;
+      border-radius:10px;
+      border:0;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    /* Komentar */
+    .comments{
+      margin-top:6px;
+      padding:8px 2px;
+    }
+
+    .comment-count{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:600;
+      margin-bottom:10px;
+      color:#0f1724;
+    }
+
+    .rsvp-list{display:flex;flex-direction:column;gap:12px}
+    .rsvp-item{
+      background:white;
+      border-radius:12px;
+      padding:8px; /* list box ucapan */
+      box-shadow:0 4px 8px rgba(2,6,23,0.04); /* list box ucapan */
+      display:flex;
+      gap:8px;     /* list box ucapan */
+      align-items:flex-start;
+      opacity:0;
+      transform:translateY(12px) scale(0.995);
+      animation:itemIn 0.5s ease forwards;
+    }
+
+    /* inisial nama di list ucapan */
+    .avatar{
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      background:#7c7a59;    /* inisial nama di list ucapan */
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:14px;
+      flex-shrink:0;
+    }
+
+    .rsvp-body{flex:1}
+    .rsvp-name{font-weight:700;display:flex;align-items:center;gap:8px}
+    .badge{
+      display:inline-block;
+      padding:4px 8px;
+      border-radius:12px;
+      font-size:12px;
+      color:#fff;
+      margin-left:6px;
+      font-weight:700;
+    }
+    .badge.hadir{background:#16a34a}
+    .badge.tidak{background:#111}
+    .badge.mungkin{background:#d97706}
+
+    .rsvp-msg{color:#111;margin-top:8px;line-height:1.5}
+
+    @keyframes itemIn{
+      from{opacity:0;transform:translateY(12px) scale(0.995)}
+      to{opacity:1;transform:translateY(0) scale(1)}
+    }
+    /* ukuran box hari, jam, menit, detik */
+    @media(max-width:460px){
+      .count-box{width:60px;height:60px}
+      .title-script{font-size:20px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="panel" role="main">
+      <div class="top">
+        <div class="title-script">Count Down</div>
+
+        <div class="count-row">
+          <div class="count-box"><div class="num" id="cd-days">00</div><div class="lbl">Hari</div></div>
+          <div class="count-box"><div class="num" id="cd-hours">00</div><div class="lbl">Jam</div></div>
+          <div class="count-box"><div class="num" id="cd-mins">00</div><div class="lbl">Menit</div></div>
+          <div class="count-box"><div class="num" id="cd-secs">00</div><div class="lbl">Detik</div></div>
+        </div>
+
+        <a class="save-btn" id="saveDateBtn" href="#form">Save The Date</a>
+      </div>
+
+      <div class="section-title">Rsvp</div>
+      <div class="subtitle">Konfirmasi Kehadiran & Ucapan Selamat</div>
+
+      <!-- Form -->
+      <div class="form-card" id="form">
+        <div class="comment-count"><span>🕊️</span><span id="commentCount">0 Comments</span></div>
+
+        <form id="rsvp-form" autocomplete="off">
+          <label for="name">Nama</label>
+          <input id="name" name="name" placeholder="Nama..." required />
+
+          <label for="message">Ucapan</label>
+          <textarea id="message" name="message" placeholder="Ucapan..."></textarea>
+
+          <label for="attend">Konfirmasi Kehadiran</label>
+          <select id="attend" name="attend">
+            <option value="Hadir">Hadir</option>
+            <option value="Tidak Hadir">Tidak Hadir</option>
+            <option value="Mungkin">Mungkin</option>
+          </select>
+
+          <div class="btn-row">
+            <button type="submit" class="btn-submit">Kirim</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- List -->
+      <div class="comments">
+        <div class="rsvp-list" id="rsvp-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const eventDate = new Date('2026-02-01T02:00:00Z');
+    const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxdrqj3gvWXuVWgHq_T-1qGaxEAgWc7SdYe7PzUi9VubjdT_o4-hjfNMok7Qyltq6JIlw/exec';
+
+    function updateCountdown(){
+      const now = new Date();
+      let diff = Math.max(0,eventDate-now);
+      const d=Math.floor(diff/86400000);diff-=d*86400000;
+      const h=Math.floor(diff/3600000);diff-=h*3600000;
+      const m=Math.floor(diff/60000);diff-=m*60000;
+      const s=Math.floor(diff/1000);
+      set('cd-days',d);set('cd-hours',h);set('cd-mins',m);set('cd-secs',s);
+    }
+    function set(id,v){document.getElementById(id).textContent=String(v).padStart(2,'0');}
+    setInterval(updateCountdown,1000);updateCountdown();
+
+    function safeHtml(s){return String(s||'').replace(/[&<>\"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));}
+    async function fetchList(){
+      try{const r=await fetch(SHEET_URL);return await r.json();}catch{return [];}
+    }
+    function renderList(list){
+      const el=document.getElementById('rsvp-list');
+      el.innerHTML='';
+      const arr=(list||[]).slice().reverse();
+      document.getElementById('commentCount').textContent=`${arr.length} Comments`;
+      if(!arr.length){el.innerHTML='<div style="text-align:center;color:#9ca3af;padding:12px">Belum ada konfirmasi.</div>';return;}
+      arr.forEach(i=>{
+        const n=safeHtml(i.name||i[0]||'');
+        const a=i.attend||i[1]||'';
+        const m=safeHtml(i.msg||i[2]||'');
+        const cls=a.toLowerCase().includes('tidak')?'tidak':(a.toLowerCase().includes('hadir')?'hadir':'mungkin');
+        const node=document.createElement('div');
+        node.className='rsvp-item';
+        node.innerHTML=`
+          <div class="avatar">${n.charAt(0).toUpperCase()}</div>
+          <div class="rsvp-body">
+            <div class="rsvp-name">${n}<span class="badge ${cls}">${a}</span></div>
+            <div class="rsvp-msg">${m}</div>
+          </div>`;
+        el.appendChild(node);
+      });
+    }
+    function addInstant(rec){
+      const el=document.getElementById('rsvp-list');
+      const n=safeHtml(rec.name);
+      const a=rec.attend;
+      const m=safeHtml(rec.msg);
+      const cls=a.toLowerCase().includes('tidak')?'tidak':(a.toLowerCase().includes('hadir')?'hadir':'mungkin');
+      const node=document.createElement('div');
+      node.className='rsvp-item';
+      node.innerHTML=`
+        <div class="avatar">${n.charAt(0).toUpperCase()}</div>
+        <div class="rsvp-body">
+          <div class="rsvp-name">${n}<span class="badge ${cls}">${a}</span></div>
+          <div class="rsvp-msg">${m}</div>
+        </div>`;
+      el.prepend(node);
+      const count=parseInt(document.getElementById('commentCount').textContent)||0;
+      document.getElementById('commentCount').textContent=`${count+1} Comments`;
+    }
+    async function postSheet(rec){
+      try{await fetch(SHEET_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(rec)});}catch(e){console.log(e);}
+    }
+    document.getElementById('rsvp-form').addEventListener('submit',async e=>{
+      e.preventDefault();
+      const name=document.getElementById('name').value.trim();
+      const msg=document.getElementById('message').value.trim();
+      const attend=document.getElementById('attend').value;
+      if(!name)return;
+      const rec={name,attend,msg,time:new Date().toLocaleString('id-ID')};
+      addInstant(rec);
+      postSheet(rec);
+      e.target.reset();
+    });
+    (async()=>{renderList(await fetchList());setInterval(async()=>{renderList(await fetchList());},15000);})();
+  </script>
+</body>
+</html>
