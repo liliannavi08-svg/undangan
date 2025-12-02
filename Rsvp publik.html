@@ -175,8 +175,8 @@
     // Simpan ke Firebase
     const form = document.getElementById("rsvpForm");
     const commentsDiv = document.getElementById("comments");
-    const rsvpRef = ref(db, "rsvp");
-
+    const rsvpRef = ref(db, "rsvp1");// HARUS DIGANTI DENGAN RSVP BARU
+    
     form.addEventListener("submit", e => {
       e.preventDefault();
       const data = {
