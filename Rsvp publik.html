@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: url('BG.png') no-repeat center center/cover;
+      background: url('Cover.png') no-repeat center center/cover;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -175,7 +175,7 @@
     // Simpan ke Firebase
     const form = document.getElementById("rsvpForm");
     const commentsDiv = document.getElementById("comments");
-    const rsvpRef = ref(db, "rsvp1"); // HARUS GANTI
+    const rsvpRef = ref(db, "rsvp");
 
     form.addEventListener("submit", e => {
       e.preventDefault();
@@ -199,6 +199,9 @@
         commentsDiv.prepend(div);
       });
     });
+        // Preload L.png agar langsung muncul, tidak loading
+const preloadL = new Image();
+preloadL.src = 'Cover.png'; 
   </script>
 
 </body>
