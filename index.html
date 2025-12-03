@@ -1,499 +1,65 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Undangan Pernikahan</title>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
-/* ========== GLOBAL ========== */
-body {
-    margin: 0;
-    font-family: 'Lora', serif;
-    color: #733a30;
-    overflow-x: hidden;
-}
-
-/* BACKGROUND PALING BELAKANG (TETAP DIAM) */
-#bg-fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('Cover.png'); /* hanya 1x */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1; /* paling belakang */
-}
-
-/* ========== COVER (TANPA BACKGROUND LG) ========== */
-#cover {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #733a30;
-    padding: 20px;
-    background: transparent; /* penting! */
-}
-
-/* ANIMASI ZOOM */
-.zoom {
-    opacity: 0;
-    transform: scale(0.8);
-    animation: zoomIn 1.2s ease forwards;
-}
-@keyframes zoomIn {
-    to { opacity: 1; transform: scale(1); }
-}
-
-.wedding-text { font-size: 20px; margin-bottom:40px; }
-.name-text { font-size: 40px; font-family: 'Great Vibes', cursive; }
-.guest-title { font-size: 15px; margin-top: 20px; }
-.guest-sub-title { font-size: 15px; margin-top: 5px; font-weight: 600; }
-
-.button {
-    margin-top: 25px;
-    background-color: #591e1f;
-    color: white;
-    padding: 10px 25px;
-    font-size: 15px;
-    border-radius: 10px;
-    text-decoration: none;
-}
-
-/* ANIMASI SLIDE */
-.slide-up {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.8s ease-out;
-}
-.slide-up.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ========== ISI UNDANGAN ========== */
-#content { display: none; width: 100%; text-align: center; }
-.section { padding: 40px 25px; }
-
-/* DOA BG */
-.doa-bg {
-    background-color: #733a30;
-    color: white;
-    font-size: 12px;
-    line-height: 1.7;
-    padding: 30px 20px;
-}
-
-/* MEMPELAI */
-.mempelai-section {
-    background-image: url('bg5.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    width: 100%;
-    height: 100vh;
-
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-
-    color: #733a30;
-}
-
-.mempelai-inner { width: 100%; padding: 40px 25px; }
-.judul-mempelai { font-size: 25px; }
-.nama-mempelai { font-size: 32px; font-family: 'Great Vibes'; }
-
-/* ACARA */
-.acara-wrapper {
-    background-color: #733a30;
-    padding: 50px 0;
-}
-.acara-wrapper h1, .acara-wrapper p { color: white; }
-
-.acara-box {
-    width: 70%;
-    margin: auto;
-    background: white;
-    border-radius: 160px / 180px;
-    padding: 80px 2px;
-
-    background-image: url('bg5.png');
-    background-size: cover;
-    background-position: center;
-
-    box-shadow: 0 3px 10px rgba(0,0,0,0.50);
-    color: #733a30;
-    border: 5px solid #733a30;
-    font-size: 14px;
-    margin-bottom: 30px;
-}
-
-/* COUNTDOWN */
-.countdown { display: flex; justify-content: center; gap: 18px; margin: 25px 0; }
-.countdown-item {
-    background: #fff;
-    border-radius: 18px;
-    padding: 10px 12px;
-    width: 60px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-/* STREAMING */
-.streaming-section {
-    padding: 40px 25px;
-    text-align: center;
-    color: #733a30;
-}
-.streaming-box {
-    width: 90%;
-    margin: auto;
-    background: rgba(255,255,255,0.85);
-    border-radius: 25px;
-    padding: 20px 25px;
-    border: 4px solid #fff;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-}
-
-/* LOVE STORY */
-.story-title { font-size: 25px; color: #733a30; margin-bottom: 30px; }
-.story-text { font-size: 14px; line-height: 1.8; max-width: 350px; margin: 0 auto; text-align: justify; }
-
-/* WEDDING GIFT */
-.wg-section { background-color: #733a30; padding: 30px 0; text-align: center; color: white; }
-.wg-oval {
-    width: 85%;
-    margin: auto;
-    background: white;
-    border-radius: 30px;
-    padding: 4px 30px;
-    border: 4px solid #fff;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-
-    background-image: url('bg5.png');
-    background-size: cover;
-    background-position: center;
-
-    color: #733a30;
-}
-
-/* THANK YOU */
-.thanks-section {
-    width: 100%;
-    height: 100vh;
-    background: transparent; /* biarkan memakai bg-fixed di belakang */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-.thanks-text {
-    background: rgba(255,255,255,0.40);
-    backdrop-filter: blur(1px);
-    padding: 25px 30px;
-    border-radius: 50px;
-    box-shadow: 0 0 50px rgba(255,255,255,0.9);
-}
-
-/* FOOTER */
-.footer-section {
-    background: #733a30;
-    padding: 30px 20px;
-    text-align: center;
-    color: white;
-}
+*{box-sizing:border-box;}
+html, body{margin:0;padding:0;overflow-x:hidden;font-family:'Lora', serif;color:#733a30;}
+#bg-fixed{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-10;overflow:hidden;}
+#bg-fixed img{width:100%;height:100%;object-fit:cover;object-position:center;}
+#cover{height:100vh;background-image:url('Cover.png');background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.zoom{opacity:0;transform:scale(.8);animation:zoomIn 1.2s ease forwards;}@keyframes zoomIn{to{opacity:1;transform:scale(1);}}
+.wedding-text{font-size:20px;margin-bottom:40px;}
+.name-text{font-size:40px;font-family:'Great Vibes',cursive;}
+.guest-title{font-size:15px;margin-top:20px;}
+.guest-sub-title{font-size:15px;margin-top:5px;font-weight:600;}
+.button{margin-top:25px;background:#591e1f;color:white;padding:10px 25px;border-radius:10px;text-decoration:none;font-size:15px;cursor:pointer;}
+#content{display:none;width:100%;text-align:center;}
+.section{padding:40px 25px;}
+.section-bg{width:100%;min-height:100vh;background-size:cover;background-position:center;background-repeat:no-repeat;display:flex;justify-content:center;align-items:center;padding:40px 25px;}
+.doa-bg{background:#733a30;color:white;font-size:12px;line-height:1.7;padding:30px 20px;}
+.mempelai-section{background-image:url('bg5.png');}
+.mempelai-inner{max-width:350px;}
+.nama-mempelai{font-size:32px;font-family:'Great Vibes';margin:20px 0 10px;}
+.story-title{font-size:25px;margin-bottom:30px;}
+.story-text{font-size:14px;line-height:1.8;max-width:350px;margin:auto;text-align:justify;}
+.thanks-section{min-height:100vh;background-size:cover;background-position:center;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px;}
+.thanks-text{background:rgba(255,255,255,0.40);padding:25px 30px;border-radius:50px;}
+.footer-section{background:#733a30;padding:30px 20px;text-align:center;color:white;}
 </style>
-
-
-<meta property="og:title" content="The Wedding of Deron & Levonka" />
-<meta property="og:description" content="Anda diundang untuk menghadiri acara pernikahan Deron & Levonka." />
-<meta property="og:image" content="https://liliannavi08-svg.github.io/music/Cover.jpg" />
-<meta property="og:url" content="https://username.github.io/undangan/" />
-<meta property="og:type" content="website" />
 </head>
 <body>
-<div id="bg-fixed"></div>
-
+<div id="bg-fixed"><img src="Cover.png" alt="bg"></div>
 <div id="cover">
-    <div class="zoom wedding-text">The Wedding of</div>
-    <div class="zoom name-text" style="animation-delay:0.3s">Deron</div>
-    <div class="zoom name-text" style="animation-delay:0.6s">&amp;</div>
-    <div class="zoom name-text" style="animation-delay:0.9s">Levonka</div>
-
-    <div class="zoom guest-title" style="animation-delay:1.2s">Kepada Yth:</div>
-    <div class="zoom guest-sub-title" id="guestName" style="animation-delay:1.5s">Nama Tamu</div>
-
-    <a class="button zoom" style="animation-delay:1.8s" id="openBtn">Buka Undangan</a>
+ <div class="zoom wedding-text">The Wedding of</div>
+ <div class="zoom name-text" style="animation-delay:0.3s">Deron</div>
+ <div class="zoom name-text" style="animation-delay:0.6s">&</div>
+ <div class="zoom name-text" style="animation-delay:0.9s">Levonka</div>
+ <div class="zoom guest-title" style="animation-delay:1.2s">Kepada Yth:</div>
+ <div class="zoom guest-sub-title" id="guestName" style="animation-delay:1.5s">Nama Tamu</div>
+ <a class="button zoom" style="animation-delay:1.8s" id="openBtn">Buka Undangan</a>
 </div>
-
-
-<!-- ================= ISI UNDANGAN ================= -->
-
-
-  
-  <!-- ======= BG 1 === -->
 <div id="content">
-    <!-- BG1 Before DOA -->
-    <div class="bg1-section" style="position:relative; background-image:url('bg1.png'); background-size:cover; background-position:center; width:100%; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
-        <div class="bg1-text" style="color:#733a30; font-family:'Lora', serif; font-size:17px; margin-bottom: 40px;">The Wedding of</div>
-        <div class="bg1-text" style="color:#733a30; font-family:'Great Vibes', cursive; font-size:40px; margin-top:10px;">Deron</div>
-        <div class="bg1-text" style="color:#733a30; font-family:'Great Vibes', cursive; font-size:36px;">&</div>
-        <div class="bg1-text" style="color:#733a30; font-family:'Great Vibes', cursive; font-size:40px;">Levonka</div>
-    </div>
-
-    <!-- DOA -->
-    <div class="doa-bg">
-        <p>Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.</p>
-    </div>
-
-    <!-- MEMPELAI -->
-    <div class="mempelai-section">
-        <div class="judul-mempelai"><br>Bride & Groom</div>
-        <p>Assalamu'alaikum Wr. Wb.<br>
-        Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah semoga ridho-Mu tercurah mengiringi pernikahan kami:</p>
-        <div class="nama-mempelai">Levonka</div>
-        <h1>Levonka Demina, S.Kom</h1>
-        <p>Putri kedua dari<br>Bapak Irsyam dan Ibu Virla</p>
-        <a href="https://instagram.com/username" target="_blank" class="btn-lokasi"><i class="fab fa-instagram"></i> Instagram</a>
-        <h2>&</h2>
-        <div class="nama-mempelai">Deron</div>
-        <h1>Deron Smith, S.Kom</h1>
-        <p>Putra keempat dari<br>Bapak Sam Smith dan Ibu Velery</p>
-        <a href="https://instagram.com/username" target="_blank" class="btn-lokasi"><i class="fab fa-instagram"></i> Instagram</a>
-    </div>
-
-    <!-- AKAD & RESEPSI -->
-    <div class="acara-wrapper">
-        <h1>Save The Date</h1>
-        <p>Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i, untuk menghadiri acara pernikahan kami:</p>
-
-        <div class="countdown">
-            <div class="countdown-item"><div class="count-number" id="days">00</div><div class="count-label">Hari</div></div>
-            <div class="countdown-item"><div class="count-number" id="hours">00</div><div class="count-label">Jam</div></div>
-            <div class="countdown-item"><div class="count-number" id="minutes">00</div><div class="count-label">Menit</div></div>
-            <div class="countdown-item"><div class="count-number" id="seconds">00</div><div class="count-label">Detik</div></div>
-        </div>
-
-        <div class="acara-box">
-            <div class="acara-title">Akad Nikah</div>
-            <div class="garis"></div>
-            <div class="acara-tgl">Minggu, 02 Februari 2026</div>
-            <p>Pukul : 08:00 WIB</p>
-            <p>Alamat : Kediaman mempelai wanita,<br>Bandung Jawa Barat</p>
-            <a href="https://www.google.com/maps?q=-6.200000,106.816666" target="_blank" class="btn-lokasi">
-    <i class="fas fa-location-dot"></i> Lokasi Acara
-</a>
-
-
-            <div style="height:45px"></div>
-          
-</div>
-          <div class="acara-box">
-            <div class="acara-title">Resepsi</div>
-            <div class="garis"></div>
-            <div class="acara-tgl">Minggu, 02 Februari 2026</div>
-            <p>Pukul : 08:00 WIB</p>
-            <p>Alamat : Kediaman mempelai wanita,<br>Bandung Jawa Barat</p>
-            <a href="https://www.google.com/maps?q=-6.200000,106.816666" target="_blank" class="btn-lokasi">
-    <i class="fas fa-location-dot"></i> Lokasi Acara
-</a>
-
-             <div style="height:45px"></div>
-        </div>
-    </div>
-
-    <!-- LIVE STREAMING -->
-    <div class="streaming-section">
-        <div class="streaming-box">
-            <div class="streaming-title">Live Streaming</div>
-            <p class="streaming-text">Temui kami secara virtual untuk menyaksikan acara pernikahan kami melalui tautan di bawah ini:</p>
-            <a href="https://instagram.com/levonka" target="_blank" class="streaming-btn"><i class="fab fa-instagram"></i> @levonka</a>
-        </div>
-        <br><br>
-
-        <div class="streaming-box">
-        <div class="story-title">Love Story</div>
-        <div class="story-subtitle">Awal Bertemu</div>
-        <p class="story-text">Awal mengenal dimulai sejak duduk dibangku SMA namun saat itu kami tidak saling akrab. Pada tahun 2019 kami mulai dekat dan saling mengenal satu sama lain.</p>
-
-        <div class="story-subtitle">Lamaran</div>
-        <p class="story-text">Setelah 4 tahun mengenal dekat kami berdua meyakini mampu melangkah ke jenjang yang lebih serius. Pada 18 November 2023 kami pun resmi bertunangan dengan restu dari kedua orangtua dan keluarga besar.</p>
-
-        <div class="story-subtitle">Pernikahan</div>
-        <p class="story-text">Setelah 4 tahun mengenal dekat kami berdua meyakini mampu melangkah ke jenjang yang lebih serius. Pada 18 November 2023 kami pun resmi bertunangan dengan restu dari kedua orangtua dan keluarga besar.</p>
-    </div></div>
-
-    <!-- WEDDING GIFT -->
-    <div class="wg-section">
-        <div class="wg-oval">
-            <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/gift.svg" class="wg-icon">
-            <div class="wg-title-inside">Wedding Gift</div>
-             
-            <!-- REKENING 1 -->
-            <div class="wg-inner-oval">
-                <div class="wg-row">
-                    <img src="mandiri.png" class="wg-bank-logo">
-                    <div class="wg-text"><b>1234 5678 9012</b><br>a.n. Levonka Demina</div>
-                    <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/clipboard.svg" class="wg-copy" onclick="copyRek('123456789012')">
-                </div>
-            </div>
-            
-           <!-- REKENING 2 -->
-            <div class="wg-inner-oval">
-                <div class="wg-row">
-                    <img src="mandiri.png" class="wg-bank-logo">
-                    <div class="wg-text"><b>1234 5678 9012</b><br>a.n. Deron</div>
-                    <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons/icons/clipboard.svg" class="wg-copy" onclick="copyRek('123456789012')">
-                </div>
-            </div>
-            
-            <h3>Kirim Kado</h3>
-            <p>Nama penerima : Levonka <br>Nomor Hp : 0804765897 <br>Jalan Melati 04 RT.07 Bandung</p>
-        </div>
-
-        <!-- RSVP -->
-        <section class="rsvp-oval">
-            <div class="rsvp-box">
-                <div class="rsvp-title">RSVP</div>
-                <p class="rsvp-text">Kirim ucapa terbaik<br> untuk kedua mempelai:</p>
-                <a href="https://lumieraid.github.io/undangan/rsvp.html" target="_blank" class="rsvp-btn">Klik disini</a>
-
-            </div>
-            </div>
-        </section>
-                    <!-- THANK YOU SECTION -->
-<div class="thanks-section">
-    <div class="thanks-text">
-        <p>Merupakan suatu kehormatan<br> dan kebahagiaan bagi kami
-          apabila Bapak/Ibu/Saudara/i berkenan hadir<br>dan memberikan doa restu kepada kedua mempelai<br><br><br></p><h3>Hormat Kami</h3>
-        <h1>Deron & Levonka</h1>
-    </div>
-</div>
-
-
-
-            <!-- FOOTER -->
-            <footer class="footer-section">
-            <img src="Logo.png" class="footer-logo" alt="Logo">
-
-            <p class="made">Made with ♥️ by LumiEra</p>
-
-             <div class="footer-icons">
-         <a href="https://instagram.com/lumiera_8" target="_blank">
-            <i class="fab fa-instagram"></i>
-        </a>
-
-        <a href="https://wa.me/6282255603601" target="_blank">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-
-        <a href="mailto:viviaann1233@gmail.com" target="_blank">
-            <i class="fas fa-envelope"></i>
-        </a>
-        </div>
-        </footer>
-
-          <!-- Musik -->
-         <audio id="bgMusic" loop>
-          <source src="Pernikahan.mp3" type="audio/mpeg">
-         </audio>
+ <div class="section-bg" style="background-image:url('bg1.png');"><div class="section">Selamat datang</div></div>
+ <div class="doa-bg section">Bismillahirrahmanirrahim...</div>
+ <div class="section-bg mempelai-section"><div class="mempelai-inner"><h2 class="nama-mempelai">Deron & Levonka</h2><p>Putra & Putri terbaik...</p></div></div>
+ <div class="section"><div class="story-title">Love Story</div><p class="story-text">Ini cerita kami...</p></div>
+ <div class="thanks-section" style="background-image:url('thanks-bg.png');"><div class="thanks-text"><h1>Terima Kasih</h1><p>Atas doa & restu Anda</p></div></div>
+ <div class="footer-section">Created with Love</div>
 </div>
 <script>
-// Nama tamu
-const urlParams = new URLSearchParams(window.location.search);
-const to = urlParams.get('to');
-if(to){ document.getElementById('guestName').textContent = to; }
-
-
-
-// Preload L.png agar langsung muncul, tidak loading
-const preloadL1 = new Image();
-preloadL1.src = 'Cover.png'; 
-
-const preloadL2 = new Image();
-preloadL2.src = 'bg1.png';
-
-
-
-
-
-// Tombol buka undangan
-document.getElementById('openBtn').onclick = function(){
-    document.getElementById('cover').style.display = 'none';
-    document.getElementById('content').style.display = 'block';
-    document.body.style.overflow = 'auto';
-    document.getElementById('bgMusic').play().catch(()=>{});
+const openBtn=document.getElementById("openBtn");
+const content=document.getElementById("content");
+openBtn.onclick=()=>{
+ document.getElementById('cover').style.display='none';
+ content.style.display='block';
+ window.scrollTo({top:0,behavior:'instant'});
 };
-
-// Countdown
-const targetDate = new Date("2026-02-02T00:00:00").getTime();
-setInterval(() => {
-  const now = new Date().getTime();
-  const diff = targetDate - now;
-  document.getElementById("days").innerText = Math.floor(diff / (1000*60*60*24));
-  document.getElementById("hours").innerText = Math.floor((diff / (1000*60*60)) % 24);
-  document.getElementById("minutes").innerText = Math.floor((diff / (1000*60)) % 60);
-  document.getElementById("seconds").innerText = Math.floor((diff / 1000) % 60);
-}, 1000);
-
-// Scroll Animasi
-document.addEventListener('DOMContentLoaded', () => {
-    const selectors = ['#content .section', '#content .mempelai-section', '#content .acara-wrapper', '#content .doa-bg', '#content .acara-box', '#content .bg1-section', '.wg-section', '.wg-oval', '.wg-inner-oval', '.mempelai-border', '.streaming-section', '.streaming-box', '.story-subtitle', '.story-text', '.story-title', '.rsvp-title', '.rsvp-section', '.rsvp-box', '.rsvp-oval', '.rsvp-text', '.thanks-section', '.thanks-text'];
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const children = Array.from(entry.target.children);
-            if(entry.isIntersecting){
-                children.forEach((child,index)=>{setTimeout(()=>child.classList.add('show'), index*200)});
-            }else{ children.forEach(child=>child.classList.remove('show')); }
-        });
-    }, { threshold:0.1 });
-    document.querySelectorAll(selectors.join(',')).forEach(el => {
-        if(!el.children.length){
-            const wrap = document.createElement('span');
-            wrap.textContent = el.textContent;
-            el.textContent = '';
-            el.appendChild(wrap);
-        }
-        Array.from(el.children).forEach(child=>child.classList.add('slide-up'));
-        observer.observe(el);
-    });
-});
-
-// Copy rekening dengan notif
-function copyRek(no){
-    navigator.clipboard.writeText(no).then(() => {
-        const notif = document.getElementById('copyNotif');
-        notif.style.display = 'block';
-        setTimeout(() => { notif.style.display = 'none'; }, 1500);
-    });
-}
+const urlParams=new URLSearchParams(window.location.search);
+const guest=urlParams.get('to');
+if(guest){document.getElementById("guestName").innerText=guest;}
 </script>
-
-<div id="copyNotif" style="
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #7C7A59;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 14px;
-    display: none;
-    z-index: 9999;
-">Disalin</div>
-
 </body>
 </html>
