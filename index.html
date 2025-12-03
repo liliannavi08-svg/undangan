@@ -13,6 +13,14 @@ body {
     font-family: 'Lora', serif;
     color: #733a30;
     overflow-x: hidden;
+    
+/* ========== BG BELAKANG ========== */
+    margin: 0;
+    background-image: url('Cover.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* penting */
 }
 
 /* ================= COVER ================= */
@@ -136,7 +144,7 @@ body {
 .count-label { font-size: 11px; margin-top: 4px; color: #444; letter-spacing: 0.5px; text-transform: uppercase; }
 
 /* LIVE STREAMING */
-.streaming-section { width: 100%; padding: 40px 25px; background-image: url('Cover.png'); background-size: cover; background-position: center; text-align: center; color: #733a30; }
+.streaming-section { width: 100%; padding: 40px 25px; background-image: transparent; background-size: cover; background-position: center; text-align: center; color: #733a30; }
 .streaming-box { width: 90%; margin: auto; background: rgba(255,255,255,0.85); border-radius: 25px; padding: 20px 25px; border: 4px solid #fff; box-shadow: 0px 6px 20px rgba(0,0,0,0.7); backdrop-filter: blur(3px); background-image: url(''); background-size: cover; background-position: center; }
 .streaming-title { font-size: 25px; font-weight: 400; margin-bottom: 10px; color: #733a30; }
 .streaming-text { font-size: 14px; line-height: 1.8; margin-bottom: 10px; color: #733a30; }
@@ -167,42 +175,34 @@ body {
 * { box-sizing: border-box; }
 body, html { max-width: 100%; overflow-x: hidden; }
 
-/* Ucapan terimakasih*/
+/* ================= THANK YOU SECTION ================= */
 .thanks-section {
-    background-image: url('bg1.png');
+    width: 100%;
+    height: 100vh;
+    background-image: transparent; /* ganti sesuai nama gambar kamu */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-    min-height: 100vh;
-    width: 100%;
-    
-    display: flex;          /* Aktifkan Flexbox */
-    justify-content: center;/* Tengah secara vertikal */
-    align-items: center;    /* Tengah secara horizontal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 
-    padding: 0; /* tidak perlu padding */
     color: #733a30;
-    position: relative;
-}
-.thanks-overlay {
-    padding: 20px 20px;
-    border-radius: 12px;
-    max-width: 300px;
+    padding: 20px;
 }
 
-.thanks-section h1 {
-   font-family:'Great Vibes', cursive; 
-   font-size: 40px;
-   font-weight: 400;
-   
-}p
-
-.thanks-section p {
-    font-family: 'Lora', serif;
-    font-size: 14px;
-    line-height: 1.7;
+.thanks-text h1 {
+    font-size: 40px;
+    font-family: 'Great Vibes', cursive;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-top: -10px;
+}
+.thanks-text p {
+    font-size: 17px;
+    font-family: 'Lora', serif;;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 
@@ -393,14 +393,14 @@ body, html { max-width: 100%; overflow-x: hidden; }
             </div>
             </div>
         </section>
-            <!-- SECTION TERIMA KASIH -->
-<section class="thanks-section">
-    <div class="thanks-overlay">
-        <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami<br>
-        jika Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kami</p>
-        <h1>Deron & levonka</h1>
+                    <!-- THANK YOU SECTION -->
+<div class="thanks-section">
+    <div class="thanks-text">
+        <p>Merupakan suatu kehormatan<br> dan kebahagiaan bagi kami
+          apabila Bapak/Ibu/Saudara/i berkenan hadir<br>dan memberikan doa restu kepada kedua mempelai<br><br><br>Hormat Kami</p>
+        <h1>Deron & Levonka</h1>
     </div>
-</section>
+</div>
 
 
 
